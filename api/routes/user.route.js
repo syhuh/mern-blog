@@ -5,6 +5,7 @@ import {
   deleteUser,
   signout,
   getUsers,
+  getUser,
 } from "../controllers/user.controller.js";
 import { verifyToken } from "../utils/verifyUser.js";
 
@@ -15,5 +16,6 @@ route.put("/update/:userId", verifyToken, updateUser);
 route.delete("/delete/:userId", verifyToken, deleteUser);
 route.post("/signout", signout);
 route.get("/getusers", verifyToken, getUsers);
+route.get("/:userId", getUser);
 
 export default route;
