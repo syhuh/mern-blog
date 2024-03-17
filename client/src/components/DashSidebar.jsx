@@ -6,6 +6,7 @@ import {
   HiArrowSmRight,
   HiDocumentText,
   HiOutlineUserGroup,
+  HiAnnotation,
 } from "react-icons/hi";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
@@ -74,6 +75,17 @@ export default function DashSidebar() {
                 as="div"
               >
                 Users
+              </Sidebar.Item>
+            </Link>
+          )}
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=comments">
+              <Sidebar.Item
+                active={tab === "comments"}
+                icon={HiAnnotation}
+                as="div"
+              >
+                Comments
               </Sidebar.Item>
             </Link>
           )}
