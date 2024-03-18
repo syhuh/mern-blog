@@ -93,7 +93,7 @@ export const deleteComment = async (req, res, next) => {
   }
 };
 
-export const getComments = async (req, res, next) => {
+export const getcomments = async (req, res, next) => {
   console.log(req.user);
 
   if (!req.user.isAdmin) {

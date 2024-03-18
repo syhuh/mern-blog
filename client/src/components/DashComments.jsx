@@ -37,7 +37,7 @@ export default function DashComments() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getComments`);
+        const res = await fetch(`/api/comment/getcomments`);
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);
@@ -59,7 +59,7 @@ export default function DashComments() {
     const startIndex = comments.length;
     try {
       const res = await fetch(
-        `/api/comment/getComments?startIndex=${startIndex}`
+        `/api/comment/getcomments?startIndex=${startIndex}`
       );
       const data = await res.json();
       if (res.ok) {

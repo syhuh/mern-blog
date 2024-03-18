@@ -6,7 +6,7 @@ import {
   likeComment,
   editComment,
   deleteComment,
-  getComments,
+  getcomments,
 } from "../controllers/comment.controller.js";
 import { get } from "mongoose";
 
@@ -17,6 +17,6 @@ router.get("/getPostComments/:postId", getPostComments);
 router.put("/likeComment/:commentId", verifyToken, likeComment);
 router.put("/editComment/:commentId", verifyToken, editComment);
 router.delete("/deleteComment/:commentId", verifyToken, deleteComment);
-router.get("/getComments", verifyToken, getComments);
+router.get("/getcomments", verifyToken, getcomments);
 
 export default router;
