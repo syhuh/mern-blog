@@ -122,10 +122,10 @@ export default function Search() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">
-              Search Term:
+              검색할 내용:
             </label>
             <TextInput
-              placeholder="Search..."
+              placeholder="검색..."
               id="searchTerm"
               type="text"
               value={sidebarData.searchTerm}
@@ -133,42 +133,42 @@ export default function Search() {
             />
           </div>
           <div className="flex items-center gap-2">
-            <label className="font-semibold">Sort:</label>
+            <label className="font-semibold">정렬:</label>
             <Select id="sort" value={sidebarData.sort} onChange={handleChange}>
-              <option value="desc">Latest</option>
-              <option value="asc">Oldest</option>
+              <option value="desc">최신순</option>
+              <option value="asc">과거순</option>
             </Select>
           </div>
           <div className="flex items-center gap-2">
-            <label className="font-semibold">Category:</label>
+            <label className="font-semibold">카테고리:</label>
             <Select
               id="category"
               value={sidebarData.category}
               onChange={handleChange}
             >
-              <option value="all">All</option>
-              <option value="uncategorized">Uncategorized</option>
+              <option value="all">모두</option>
+              <option value="uncategorized">기타</option>
               <option value="javascript">JavaScript</option>
               <option value="reactjs">React.js</option>
               <option value="nextjs">Next.js</option>
             </Select>
           </div>
           <Button type="submit" outline gradientDuoTone="purpleToPink">
-            Apply Filters
+            필터 적용
           </Button>
         </form>
       </div>
       <div className="w-full">
         <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5">
-          Post results:
+          검색 결과:
         </h1>
         <div className="p-7 flex flex-wrap justify-center gap-4">
           {!loading && posts.length === 0 && (
             <h1 className="text-2xl font-semibold text-gray-500">
-              No posts found.
+              해당하는 포스트가 없습니다.
             </h1>
           )}
-          {loading && <p className="text-xl text-gray-500">Loading...</p>}
+          {loading && <p className="text-xl text-gray-500">로딩중...</p>}
           {!loading &&
             posts &&
             posts.length > 0 &&
@@ -178,7 +178,7 @@ export default function Search() {
               onClick={handleShowMore}
               className="text-teal-500 text-lg hover:underline p-7 w-full"
             >
-              Show More
+              더보기
             </button>
           )}
         </div>
