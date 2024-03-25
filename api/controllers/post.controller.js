@@ -8,11 +8,30 @@ export const create = async (req, res, next) => {
   if (!req.body.title || !req.body.content) {
     return next(errorHandler(400, "Please provide all required fields!"));
   }
-  const slug = req.body.title
+
+  // Make a slug including hangul from title
+  const dashedLowerCaseSlug = req.body.title
+    .trim()
     .split(" ")
     .join("-")
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9-]/g, "");
+    .toLowerCase();
+  // console.log("dashedLowerCaseSlug => ", dashedLowerCaseSlug);
+
+  const toExclude = /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-zA-Z0-9-]+/g;
+  const wordsArray = dashedLowerCaseSlug.split(toExclude);
+  // console.log("wordsArray => ", wordsArray);
+
+  const slug = wordsArray
+    .map((x) => (toExclude.test(x) ? "" : encodeURI(x)))
+    .join("");
+  // console.log("slug => ", slug);
+
+  // const slug = req.body.title
+  //   .split(" ")
+  //   .join("-")
+  //   .toLowerCase()
+  //   .replace(/[^a-zA-Z0-9-]/g, "");
+
   const newPost = new Post({
     ...req.body,
     slug,
@@ -34,7 +53,7 @@ export const getposts = async (req, res, next) => {
     const posts = await Post.find({
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.category && { category: req.query.category }),
-      ...(req.query.slug && { slug: req.query.slug }),
+      ...(req.query.slug && { slug: encodeURI(req.query.slug) }),
       ...(req.query.postId && { _id: req.query.postId }),
       ...(req.query.searchTerm && {
         $or: [
