@@ -59,10 +59,21 @@ export default function CreatePost() {
     };
   };
 
+  const handleGetContents = () => {
+    // const quill = quillRef.current.getEditor();
+    // const contents = quill.getSemanticHTML();
+    const content = document.getElementsByClassName("ql-editor")[0].innerHTML;
+    // console.log("handleGetContents=> ", content);
+    setFormData({ ...formData, content });
+  };
+
   // Highlight.js 설정
   hljs.configure({
     languages: ["html", "css", "javascript", "typescript", "jsx", "tsx"],
+    // cssSelector: ".ql-syntax",
   });
+
+  console.log(formData.content);
 
   // React Quill modules
   // useMemo를 사용하여 modules가 렌더링 시 에디터가 사라지는 버그를 방지
@@ -151,6 +162,8 @@ export default function CreatePost() {
 
   const hangleSubmit = async (e) => {
     e.preventDefault();
+
+    handleGetContents();
 
     try {
       const res = await fetch("/api/post/create", {

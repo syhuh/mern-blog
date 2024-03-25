@@ -86,6 +86,14 @@ export default function UpdatePost() {
     };
   };
 
+  const handleGetContents = () => {
+    // const quill = quillRef.current.getEditor();
+    // const contents = quill.getSemanticHTML();
+    const content = document.getElementsByClassName("ql-editor")[0].innerHTML;
+    // console.log("handleGetContents=> ", content);
+    setFormData({ ...formData, content });
+  };
+
   // Highlight.js 설정
   hljs.configure({
     languages: ["html", "css", "javascript", "typescript", "jsx", "tsx"],
@@ -178,6 +186,9 @@ export default function UpdatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    handleGetContents();
+
     try {
       const res = await fetch(
         `/api/post/updatepost/${formData._id}/${currentUser._id}`,
